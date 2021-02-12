@@ -12,13 +12,13 @@ Predicting protein contact residues and secondary structures from its amino acid
 
 We tested our models on Ubuntsu 16.04 .
 
-## Setup 
-Downloading pre-trained models and datasets 
-Pre-trained models (for prediction) and datasets (for training) are needed.
+# Setup
+Downloading pre-trained models and datasets
+Pre-trained models(for prediction) and datasets(for training) are needed.
 Please download these files from the link below.
-<https://drive.google.com/drive/u/1/folders/1_Ys7dZ2P0uF52nvXZkkMeIv0rbqhUMPj>
+<https: // drive.google.com/drive/u/1/folders/1_Ys7dZ2P0uF52nvXZkkMeIv0rbqhUMPj >
 
-## HHblits
+# HHblits
 You need to set up hhblits for generation of MSA.
 Please edit the path to hhblits in run_hhblits_local.py appropriately.
 
@@ -33,4 +33,3 @@ When you want to use your original fasta file, put all your fasta files into ./d
 If you want to train models originally, set up the database and run the following command.
 It takes 2 or 3 days with NVIDIA TITAN GTX GPU.
 `python multitask.py`
-
