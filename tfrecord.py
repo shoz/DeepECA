@@ -58,7 +58,7 @@ def read_dssp(data_file):
     return ss, asa_num
 
 
-def read_data(name):
+def extract_features(name):
     # aln
     aln = read_aln(os.path.join(aln_dir, name+".aln"))
     m = aln.shape[0]
@@ -95,11 +95,11 @@ def read_data(name):
     return m, n, aln, query, y, mask, gap, identity, identity_cons, ss_dssp, asa_num
 
 
-def write_data(name, out_dir):
+def convert_to_tfrecord(name, out_dir):
     # build dataset
     with tf.python_io.TFRecordWriter(os.path.join(out_dir, name)) as writer:
         # read data
-        m, n, align, query, y, mask, gap, identity, identity_cons, ss_dssp, asa_num = read_data(
+        m, n, align, query, y, mask, gap, identity, identity_cons, ss_dssp, asa_num = extract_features(
             name)
         print(m, n)
         # weite TFRecord
@@ -138,4 +138,4 @@ if __name__ == '__main__':
         print(k, file)
         # if os.path.exists(os.path.join(out_dir,file)):
         #	continue
-        write_data(file, out_dir)
+        convert_to_tfrecord(file, out_dir)
