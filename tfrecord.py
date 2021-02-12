@@ -3,6 +3,7 @@ import sys
 import numpy as np
 import pandas as pd
 import tensorflow as tf
+from Bio import SeqIO
 
 # dir
 base_dir = "./dataset"
@@ -19,14 +20,13 @@ aa = ["A", "C", "D", "E", "F", "G", "H", "I", "K", "L",
 aa2num = {aa[i]: str(i) for i in range(len(aa))}
 
 
-def read_fasta(fasta_file):
+def read_fasta(path_to_fasta):
     # fasta_file="/mnt/hdd1/Data/PSICOV/seq/1a3aA.fasta" for test
-    with open(fasta_file) as f:
-        fasta = f.readlines()
-    fasta = fasta[1].replace("U", "-").replace("B", "-").replace("Z",
-                                                                 "-").replace("X", "-").replace("O", "-").replace("\n", "")
-    fasta = np.array([aa2num[fasta[i]] for i in range(len(fasta))]).astype(int)
-    return fasta
+    seq = str([e for e in SeqIO.parse(path_to_fasta, 'fasta')][0].seq)
+    seq = (seq.replace("U", "-").replace("B", "-")
+           .replace("Z", "-").replace("X", "-").replace("O", "-").replace("\n", ""))
+    seq = np.array([aa2num[seq[i]] for i in range(len(seq))]).astype(int)
+    return seq
 
 
 def read_aln(aln_file):
